@@ -1,4 +1,4 @@
-name: Release
+name: Build and Deploy to EKS
 
 on:
   pull_request:
