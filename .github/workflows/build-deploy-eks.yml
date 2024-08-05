@@ -41,7 +41,7 @@ jobs:
           KUBE_YAML: deployment.yaml
           ENVSUBST: true
           KUBE_ROLLOUT: true
-          IMAGE_TAG: 1.21.6
+          IMAGE_TAG: $IMAGE_TAG
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           KUBECONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
