@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasky
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tasky
+  template:
+    metadata:
+      labels:
+        app: tasky
+    spec:
+      containers:
+      - name: tasky
+        image: $IMAGE
+        env:
+        - name: MONGODB_URI
+          value: "TEMP"
+        env:
+        - name: SECRET_KEY
+          value: "TEMP"            
+        ports:
+        - containerPort: 8080
