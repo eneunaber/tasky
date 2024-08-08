@@ -38,22 +38,16 @@ jobs:
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
       - name: Print name
-        run: echo "Image is $IMAGE ||| secret is ${{secrets.IMAGE}}"
-        env:
-          IMAGE: ${{ secrets.IMAGE }}
+        run: echo "LOCAL_IMAGE is ||| secret is ${{env.LOCAL_IMAGE}}"
 
-      - name: Print name
-        run: echo "MONGODB_URI is $MONGODB_URI ||| secret is ${{secrets.MONGODB_URI}}"
-        env:
-          IMAGE: ${{ secrets.MONGODB_URI }}
 
-      - name: Deployment
-        uses: Pablommr/kubernetes-eks@v1.2.0
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          KUBECONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
-          IMAGE: ${{ env.LOCAL_IMAGE }}
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          KUBE_YAML: deployment.yaml
-          ENVSUBST: true
+      # - name: Deployment
+      #   uses: Pablommr/kubernetes-eks@v1.2.0
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     KUBECONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
+      #     IMAGE: ${{ env.LOCAL_IMAGE }}
+      #     MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      #     KUBE_YAML: deployment.yaml
+      #     ENVSUBST: true
