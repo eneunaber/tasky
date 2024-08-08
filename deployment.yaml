@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: tasky
-        image: 507453150539.dkr.ecr.us-east-1.amazonaws.com/tasky
+        image: $IMAGE
         env:
         - name: MONGODB_URI
           value: $MONGODB_URI
