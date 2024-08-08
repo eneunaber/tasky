@@ -29,10 +29,10 @@ spec:
     spec:
       containers:
       - name: tasky
-        image: 507453150539.dkr.ecr.us-east-1.amazonaws.com/tasky:ec15b0e0736f7e983af1ff779f7573f6150e6e63
+        image: $IMAGE
         env:
         - name: MONGODB_URI
-          value: "mongodb://tasky-user:testme123@10.0.1.145:27017/?authSource=admin"
+          value: $MONGODB_URI
         - name: SECRET_KEY
           value: "TEMP"            
         ports:
