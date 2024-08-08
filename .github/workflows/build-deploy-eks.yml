@@ -5,6 +5,7 @@ on:
 
 env:
   ECR_REPOSITORY: tasky
+  LOCAL_IMAGE: ""
 
 jobs:                                            
   release:                                       
@@ -31,20 +32,11 @@ jobs:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: ${{ env.ECR_REPOSITORY }} 
           IMAGE_TAG: ${{ github.sha }}
+          LOCAL_IMAGE: $REGISTRY/$REPOSITORY:$IMAGE_TAG 
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
-
-        # env:
-        #   KUBE_YAML: deployment.yaml
-        #   ENVSUBST: true
-        #   KUBE_ROLLOUT: true
-        #   IMAGE_TAG: $IMAGE_TAG
-        #   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        #   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        #   KUBECONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
-        #   IMAGE: $REGISTRY/$REPOSITORY:$IMAGE_TAG
       - name: Print name
         run: echo "Image is $IMAGE ||| secret is ${{secrets.IMAGE}}"
         env:
@@ -61,7 +53,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           KUBECONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
-          IMAGE: ${{ secrets.IMAGE }}
+          IMAGE: ${{ env.LOCAL_IMAGE }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           KUBE_YAML: deployment.yaml
           ENVSUBST: true
