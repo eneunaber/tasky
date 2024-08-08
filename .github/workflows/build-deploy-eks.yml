@@ -5,7 +5,6 @@ on:
 
 env:
   ECR_REPOSITORY: tasky
-  LOCAL_IMAGE: ""
 
 jobs:                                            
   release:                                       
@@ -32,7 +31,6 @@ jobs:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: ${{ env.ECR_REPOSITORY }} 
           IMAGE_TAG: ${{ github.sha }}
-          LOCAL_IMAGE: "${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}"
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
