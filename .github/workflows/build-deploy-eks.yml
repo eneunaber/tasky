@@ -56,4 +56,3 @@ jobs:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           KUBE_YAML: deployment.yaml
           ENVSUBST: true
-          KUBE_ROLLOUT: true   
