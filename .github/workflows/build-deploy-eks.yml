@@ -54,6 +54,6 @@ jobs:
           KUBECONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
           IMAGE: ${{ secrets.KUBE_CONFIG_DATA }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          KUBE_YAML: /deployment.yaml
+          KUBE_YAML: deployment.yaml
           ENVSUBST: true
           KUBE_ROLLOUT: true   
