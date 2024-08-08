@@ -1,3 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tasky-service
+  labels:
+    app: tasky
+spec:
+  selector:
+    app: tasky
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,11 +29,10 @@ spec:
     spec:
       containers:
       - name: tasky
-        image: 507453150539.dkr.ecr.us-east-1.amazonaws.com/tasky
+        image: $IMAGE
         env:
         - name: MONGODB_URI
-          value: "TEMP"
-        env:
+          value: $MONGODB_URI
         - name: SECRET_KEY
           value: "TEMP"            
         ports:

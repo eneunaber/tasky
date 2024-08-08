@@ -35,15 +35,25 @@ jobs:
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
+
+        # env:
+        #   KUBE_YAML: deployment.yaml
+        #   ENVSUBST: true
+        #   KUBE_ROLLOUT: true
+        #   IMAGE_TAG: $IMAGE_TAG
+        #   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        #   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        #   KUBECONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
+        #   IMAGE: $REGISTRY/$REPOSITORY:$IMAGE_TAG
+
       - name: Deployment
         uses: Pablommr/kubernetes-eks@v1.2.0
         env:
-          KUBE_YAML: deployment.yaml
-          ENVSUBST: true
-          KUBE_ROLLOUT: true
-          IMAGE_TAG: $IMAGE_TAG
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           KUBECONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
-          IMAGE: $REGISTRY/$REPOSITORY:$IMAGE_TAG
-   
+          IMAGE: ${{ secrets.KUBE_CONFIG_DATA }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          KUBE_YAML: deployment.yml
+          ENVSUBST: true
+          KUBE_ROLLOUT: true   
